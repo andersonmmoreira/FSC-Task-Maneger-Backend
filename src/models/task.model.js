@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Schema, model } = mongoose; // Importando Schema e model de mongoose
 
 const TaskSchema = new Schema({
   description: {

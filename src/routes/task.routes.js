@@ -12,16 +12,7 @@ router.get("/", async (req, res) => {
 
 // Rota para buscar uma tarefa por ID
 router.get("/:id", async (req, res) => {
-  try {
-    const taskId = req.params.id;
-    const task = await TaskModel.findById(taskId);
-    if (!task) {
-      return res.status(404).send("Tarefa não encontrada.");
-    }
-    res.status(200).send(task);
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
+  return new TaskController(req, res).getTaskById();
 });
 
 // Rota para criar uma nova tarefa

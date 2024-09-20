@@ -7,25 +7,17 @@ const router = express.Router();
 
 // Rota para listar todas as tarefas
 router.get("/", async (req, res) => {
-  return new TaskController(req, res).getTasks();
+  return new TaskController(req, res).getAll();
 });
 
 // Rota para buscar uma tarefa por ID
 router.get("/:id", async (req, res) => {
-  return new TaskController(req, res).getTaskById();
+  return new TaskController(req, res).getById();
 });
 
 // Rota para criar uma nova tarefa
 router.post("/:id", async (req, res) => {
-  try {
-    const newTask = new TaskModel(req.body);
-
-    await newTask.save();
-
-    res.status(201).send(newTask);
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
+  return new TaskController(req, res).create();
 });
 
 // Rota para atualizar uma tarefa existente por ID

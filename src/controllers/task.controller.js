@@ -61,6 +61,20 @@ class TaskController {
       this.res.status(500).send(error.message);
     }
   }
-}
 
+  async delete() {
+    try {
+      const taskId = this.req.params.id;
+      const taskToDelete = await TaskModel.findById(taskId);
+      if (!taskToDelete) {
+        return this.res.status(404).send("Tarefa não encontrada.");
+      }
+      const deletedTask = await TaskModel.findByIdAndDelete(taskId);
+
+      this.res.status(200).send(taskToDelete);
+    } catch (error) {
+      this.res.status(500).send(error.message);
+    }
+  }
+}
 module.exports = TaskController;
